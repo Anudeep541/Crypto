@@ -20,7 +20,7 @@ def keyip():
     yek = input('Please enter the key>>> ').upper()
     if len(yek)<matsz:
         print ('Please Enter the key length >= {}'.format(matsz))
-        keyip()
+        return keyip()
     
     # Checking for character repitition in key
     
