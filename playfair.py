@@ -1,6 +1,7 @@
 '''
 Created by Sai@Anudeep on 26-07-19
 Mod by admin on 28-07-19
+Mod on 01-08-19 --> Bug fixes of repetition in plaintext
 '''
 # <<<<< Playfair Cipher >>>>>
 #######
@@ -34,12 +35,9 @@ def keyip():
     bol = kichck()
     if len(yek)>=matsz and bol==True:       
         return yek
-    #elif len(yek)<matsz and bol == False:
-    #    print ('Please Enter the key length >= {} and without character repetition'.format(matsz))
-    #    keyip()
     elif bol == False:
         print ('Please Enter key without character repitition')
-        keyip()
+        return keyip()
 #######
 # Matrix Generation
 #######
@@ -89,7 +87,7 @@ while i2<len(pltxt):
         fils = list(pltxt)
         fils.insert(i2,fil)
         pltxt = ''.join(fils)
-        print ('Plain Text after filler>>> ',pltxt)
+        #print ('Plain Text after filler>>> ',pltxt)
     i1+=2
     i2+=2
 cils = []                                                                       # List for cipher text
@@ -194,19 +192,25 @@ while cid2<len(citxt):
     cid1 +=2
     cid2 +=2
 decpntxt = ''.join(pnls)                                                    # Decrypted Plain text
-print ('Plain Text after Decrypt>>> ',decpntxt)
+#print ('Plain Text after Decrypt>>> ',decpntxt)
 did1,did2 = 0,1
 while did2<len(decpntxt):
     if did2+1>=len(decpntxt):
         break
+    if decpntxt[did1-1]==decpntxt[did2] and decpntxt[did1] == fil:
+        firmls = list(decpntxt)
+        firmls.pop(did1)
+        decpntxt=''.join(firmls)
+        #print ('First Loop',decpntxt)
     if decpntxt[did1]==decpntxt[did2+1] and decpntxt[did2]==fil:            # Checking for filler '?'
         firmls = list(decpntxt)
         firmls.pop(did2)
         decpntxt=''.join(firmls)
+        #print ('Second Loop',decpntxt)
     did1+=2
     did2+=2
-print ('Plain Text after Decrypt and check>>> ',decpntxt)
-print ('Original Plain txt>>> ',orgpltxt)
+#print ('Plain Text after Decrypt and check>>> ',decpntxt)
+#print ('Original Plain txt>>> ',orgpltxt)
 if len(decpntxt)!=len(orgpltxt):
     lcrls = list(decpntxt)
     lcrls.pop()
