@@ -7,6 +7,7 @@ Mod by admin on 28-07-19
 # Initialization
 #######
 import numpy as np
+#fil = '☼'
 alph = """ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$%&'()*+,-./:;<=>?@[\]^_"""
 matsz = 8                                                               # Matrix size
 arr = [[0 for i in range(matsz)] for j in range(matsz)]                 # Creating null matrix of given size
@@ -77,13 +78,16 @@ print (mat)
 pltxt = input('Enter PlainText>>> ').upper()                                    # Plain text
 orgpltxt = pltxt
 i1,i2 = 0,1
+for i in alph:
+    if i not in orgpltxt:
+        fil = i
 ###
 # Checking for two same letters in a pair
 ###
 while i2<len(pltxt):
     if pltxt[i1] == pltxt[i2]:
         fils = list(pltxt)
-        fils.insert(i2,'?')
+        fils.insert(i2,fil)
         pltxt = ''.join(fils)
         print ('Plain Text after filler>>> ',pltxt)
     i1+=2
@@ -137,8 +141,11 @@ def enc(pltxt):
 if len(pltxt)%2==0:
     enc(pltxt)
 else:
+    for x in alph:
+        if x not in orgpltxt:
+            lcfil = x
     apls = list(pltxt)
-    apls.append('B')
+    apls.append(lcfil)
     pltxt = ''.join(apls)
     enc(pltxt)
 
@@ -187,18 +194,19 @@ while cid2<len(citxt):
     cid1 +=2
     cid2 +=2
 decpntxt = ''.join(pnls)                                                    # Decrypted Plain text
+print ('Plain Text after Decrypt>>> ',decpntxt)
 did1,did2 = 0,1
 while did2<len(decpntxt):
     if did2+1>=len(decpntxt):
         break
-    if decpntxt[did1]==decpntxt[did2+1] and decpntxt[did2]=='?':            # Checking for filler '?'
+    if decpntxt[did1]==decpntxt[did2+1] and decpntxt[did2]==fil:            # Checking for filler '?'
         firmls = list(decpntxt)
         firmls.pop(did2)
         decpntxt=''.join(firmls)
     did1+=2
     did2+=2
-#print ('Plain Text after Decrypt>>> ',decpntxt)
-#print ('Original Plain txt>>> ',orgpltxt)
+print ('Plain Text after Decrypt and check>>> ',decpntxt)
+print ('Original Plain txt>>> ',orgpltxt)
 if len(decpntxt)!=len(orgpltxt):
     lcrls = list(decpntxt)
     lcrls.pop()
