@@ -1,7 +1,7 @@
 '''
 Created by Sai@Anudeep on 26-07-19
 Mod by admin on 28-07-19
-Mod on 01-08-19 --> Bug fixes of repetition in plaintext
+Mod on 01-08-19 --> Bug fixes of repetition in Key that returns None due to recursion
 '''
 # <<<<< Playfair Cipher >>>>>
 #######
