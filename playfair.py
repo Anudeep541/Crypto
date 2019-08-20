@@ -1,16 +1,20 @@
 '''
 Created by Sai@Anudeep on 26-07-19
 Mod by admin on 28-07-19
-Mod on 01-08-19 --> Bug fixes of repetition in Key that returns None due to recursion
+Mod on 01-08-19 --> Bug fixes of repetition in key that return None due to recursion
+Mod on 05-08-19 --> Included "alt" special codes in matrix
 '''
 # <<<<< Playfair Cipher >>>>>
 #######
 # Initialization
 #######
+#import time
+#strt = time.clock()
 import numpy as np
 #fil = '☼'
-alph = """ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$%&'()*+,-./:;<=>?@[\]^_"""
-matsz = 8                                                               # Matrix size
+#alph = """ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 !"#$%&'()*+,-./:;<=>?@[\]^_{}`~"""
+alph = """A☻BC♥DE▀FG▒HI♪♫JKLMΩφN█OPQ▄RST⌠⌡UV♠WXYZ0123456789 !"#$%&'()*+,-./:;<=>?@[\]^_{}`~"""
+matsz = 9                                                              # Matrix size
 arr = [[0 for i in range(matsz)] for j in range(matsz)]                 # Creating null matrix of given size
 r,ki,c = 0,0,0                                                          # row,column and key index
 aind = 0                                                                # alphabet index
@@ -37,7 +41,7 @@ def keyip():
         return yek
     elif bol == False:
         print ('Please Enter key without character repitition')
-        return keyip()
+        return keyip()                                                      # Due to Recursion, the normal return discards hence added return before funcn call
 #######
 # Matrix Generation
 #######
@@ -195,7 +199,7 @@ decpntxt = ''.join(pnls)                                                    # De
 #print ('Plain Text after Decrypt>>> ',decpntxt)
 did1,did2 = 0,1
 while did2<len(decpntxt):
-    if did2+1>=len(decpntxt):
+    if did2+1>=len(decpntxt) or did2>=len(decpntxt):
         break
     if decpntxt[did1-1]==decpntxt[did2] and decpntxt[did1] == fil:
         firmls = list(decpntxt)
@@ -216,3 +220,4 @@ if len(decpntxt)!=len(orgpltxt):
     lcrls.pop()
     decpntxt = ''.join(lcrls)
 print ('Plain Text after check>>> ',decpntxt)
+#print ((time.clock()-strt),"seconds")
