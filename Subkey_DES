@@ -7,7 +7,7 @@ Input must be 64-bit length and Output is of 48-bit length
 """
 
 '''
-
+print ("Please Enter input key of length 64:")
 key = list(map(int,input().split()))
 key.insert(0,'dummy')
 lenky = len(key)
@@ -44,14 +44,11 @@ def perm2(mrgls):
     p2tmp = []
     r2 = 0
     #print ("Length of p2mat>>>",len(p2mat))
-    while r2<len(p2mat):
+    for r2 in range(0,len(p2mat)):
         #print ("r2>>>",r2)
-        c2 = 0
-        while c2<6:
+        for c2 in range(0,6):
             #print ("c2>>>",c2)
             p2tmp.append(mrgls[p2mat[r2][c2]])
-            c2+=1
-        r2+=1
     return p2tmp
 
 
