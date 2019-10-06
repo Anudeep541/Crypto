@@ -49,7 +49,7 @@ def exteuc(num,dnm):
         return r22
 
 ### Calculating Φ(n) ###
-
+'''
 def funphi(a):
     pcnt = 0
     for j in range(1,a):
@@ -59,34 +59,73 @@ def funphi(a):
         if var != 0:
             pcnt+=1
     return pcnt
+'''
+def pip():
+    p = int(input("Enter p:"))
+    for i in range(1,p):
+        if i!= 1 and p%i==0:
+            print ("The value of p you entered is not prime")
+            return pip()
+    return p
 
-n = 33
-phifn = funphi(n)
-print ("Please select a number in [0,"+str(phifn)+"]")
-pubky = int(input())
-if pubky==0:
-    print ("The number you entered can't be used as public key")
-    quit()
+def qip():
+    q = int(input("Enter q:"))
+    for j in range(1,q):
+        if j!= 1 and q%j==0:
+            print ("The value of q you entered is not prime")
+            return qip()
+    return q
 
-### Calculating Private Key using input public key ###
+### p,q,n,Φ(n) values
 
-priky = exteuc(phifn,pubky)
-if priky == 0:
-    print ("The number you entered can't be used as key")
-    quit()
+p = pip()
+q = qip()
+n = p*q
+phifn = (p-1)*(q-1)
+#phifn = funphi(n)
+
+def kyip():
+    print ("Please select a number in [1,"+str(phifn)+"]")
+    pubky = int(input())
+    if pubky==0:
+        print ("The number you entered can't be used as public key")
+        return kyip()
+
+    ### Calculating Private Key using input public key ###
+
+    priky = exteuc(phifn,pubky)
+    if priky == 0:
+        print ("The number you entered can't be used as key")
+        return kyip()
+    return pubky,priky
+
+pubky,priky = kyip()
+
 print ("The public key 'e' = ",pubky)
 print ("The private key 'd' = ",priky)
 
 ### Encryption ###
-
+encls = []
 print ("Please Enter Message in integer format")
 enpltxt = int(input())
-encitxt = (enpltxt**pubky)%n
+encitxt = pow(enpltxt,pubky)%n
+'''
+enpltxt = input()
+for i in enpltxt:
+    encitxt = (ord(i)**pubky)%n
+    encls.append(encitxt)
+'''
 print ("Cipher Text>>>",encitxt)
 
 ### Decryption ###
-
+decls = []
 print ("Enter Cipher text in integer format")
 decitxt = int(input())
-depltxt = (decitxt**priky)%n
+depltxt = pow(decitxt,priky)%n
+'''
+for j in encls:
+    depltxt = (j**priky)%n
+    print (depltxt)
+    decls.append(chr(j))
+'''
 print ("Decrypted Plain Text>>>",depltxt)
