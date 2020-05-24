@@ -2,7 +2,7 @@
 Created by Jane1729 on 23-05-2020
 '''
 
-# <----------   Program to encrypt or decrypt text with all possible ROT combos or use given key    ---------->
+# <----------   Program to encrypt or decrypt text with all possible ROT combos or using given key    ---------->
 
 ## Function to select the user key or generate al possible combos ##
 
